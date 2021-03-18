@@ -1,0 +1,36 @@
+services:
+  puzi_auth.service:
+    class: MinVWS\PUZI\AuthBundle\Security\PUZIService
+    arguments: [
+      "@puzi_auth.uzi.reader",
+      "@puzi_auth.uzi.validator"
+    ]
+
+  puzi_auth.uzi.reader:
+    class: MinVWS\PUZI\UziReader
+
+  puzi_auth.uzi.validator:
+    class: MinVWS\PUZI\UziValidator
+    arguments: [
+      "%puzi_auth.strict_ca_check%",
+      "%puzi_auth.allowed_types%",
+      "%puzi_auth.allowed_roles%"
+    ]
+
+  MinVWS\PUZI\AuthBundle\Security\PUZIService:
+    alias: puzi_auth.service
+
+  puzi_auth.puzi_authenticator:
+    class: MinVWS\PUZI\AuthBundle\Security\PUZIAuthenticator
+    arguments: [
+      "@puzi_auth.service"
+    ]
+
+  puzi_auth.security.guard.puzi_guard_authenticator:
+    class: MinVWS\PUZI\AuthBundle\Security\Guard\PUZIGuardAuthenticator
+    arguments: [
+      "@puzi_auth.service"
+    ]
+
+  puzi_auth.security.user.puzi_user_provider:
+    class: MinVWS\PUZI\AuthBundle\Security\User\PUZIUserProvider
