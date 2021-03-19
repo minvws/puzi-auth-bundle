@@ -1,4 +1,5 @@
 services:
+  # The main PUZI service that will read and validate an UZI user
   puzi_auth.service:
     class: MinVWS\PUZI\AuthBundle\Security\PUZIService
     arguments: [
@@ -6,9 +7,11 @@ services:
       "@puzi_auth.uzi.validator"
     ]
 
+  # Main reader class
   puzi_auth.uzi.reader:
     class: MinVWS\PUZI\UziReader
 
+  # Main validator class
   puzi_auth.uzi.validator:
     class: MinVWS\PUZI\UziValidator
     arguments: [
@@ -17,20 +20,9 @@ services:
       "%puzi_auth.allowed_roles%"
     ]
 
-  MinVWS\PUZI\AuthBundle\Security\PUZIService:
-    alias: puzi_auth.service
-
-  puzi_auth.puzi_authenticator:
-    class: MinVWS\PUZI\AuthBundle\Security\PUZIAuthenticator
+  # Actual guard service that can be used inside your security.yml
+  puzi_auth.security.guard.authenticator:
+    class: MinVWS\PUZI\AuthBundle\Security\Guard\GuardAuthenticator
     arguments: [
       "@puzi_auth.service"
     ]
-
-  puzi_auth.security.guard.puzi_guard_authenticator:
-    class: MinVWS\PUZI\AuthBundle\Security\Guard\PUZIGuardAuthenticator
-    arguments: [
-      "@puzi_auth.service"
-    ]
-
-  puzi_auth.security.user.puzi_user_provider:
-    class: MinVWS\PUZI\AuthBundle\Security\User\PUZIUserProvider

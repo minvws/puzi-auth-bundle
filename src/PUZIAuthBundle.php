@@ -8,7 +8,6 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class PUZIAuthBundle extends Bundle
 {
-
     public function getAlias(): string
     {
         return 'puzi_auth';

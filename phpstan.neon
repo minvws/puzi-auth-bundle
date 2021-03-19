@@ -1,0 +1,18 @@
+includes:
+    - vendor/phpstan/phpstan-symfony/extension.neon
+    - vendor/phpstan/phpstan-symfony/rules.neon
+
+parameters:
+    paths:
+        - src
+    level: 8
+    inferPrivatePropertyTypeFromConstructor: true
+    checkMissingIterableValueType: false
+    reportUnmatchedIgnoredErrors: false
+    ignoreErrors:
+        - message: '#.*NodeDefinition::children.*#'
+          path: src/DependencyInjection
+        - message: '#Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\TreeBuilder::root\(\)#'
+          path: src/DependencyInjection
+        - message: '#Class Symfony\\Component\\Config\\Definition\\Builder\\TreeBuilder does not have a constructor and must be instantiated without any parameters\.#'
+          path: src/DependencyInjection

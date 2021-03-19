@@ -28,8 +28,13 @@ class PUZIService
         $this->validator = $validator;
     }
 
-    public function readFromRequest(Request $request):UziUser
+    public function readFromRequest(Request $request): UziUser
     {
         return $this->reader->getDataFromRequest($request);
+    }
+
+    public function validate(UziUser $user): bool
+    {
+        return $this->validator->isValid($user);
     }
 }

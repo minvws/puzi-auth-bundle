@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Auth0\JWTAuthBundle\Security\User;
+namespace MinVWS\PUZI\AuthBundle\Security\User;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -41,13 +41,15 @@ class UziUser implements UserInterface
         return $this->uzi->getSubscriberNumber();
     }
 
+    /**
+     * @return void
+     */
     public function eraseCredentials()
     {
     }
 
-    public function GetUziUser(): \MinVWS\PUZI\UziUser
+    public function getUziUser(): \MinVWS\PUZI\UziUser
     {
         return $this->uzi;
     }
-
 }

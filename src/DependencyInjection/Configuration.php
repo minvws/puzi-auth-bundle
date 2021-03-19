@@ -13,7 +13,14 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder('puzi_auth');
 
-        $treeBuilder->getRootNode()
+        // Keep compatibility with symfony/config < 4.2
+        if (\method_exists($treeBuilder, 'getRootNode')) {
+            $rootNode = $treeBuilder->getRootNode();
+        } else {
+            $rootNode = $treeBuilder->root('puzi_auth');
+        }
+
+        $rootNode
             ->children()
                 ->booleanNode('strict_ca_check')->defaultValue(true)->end()
                 ->arrayNode('allowed_types')->treatNullLike([])->scalarPrototype()->end()->end()
