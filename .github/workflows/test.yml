@@ -30,7 +30,7 @@ jobs:
         SYMFONY_VERSION: ${{ matrix.symfony_version }}
         PHP_VERSION: ${{ matrix.php }}
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Install PHP
       uses: shivammathur/setup-php@master
       with:
